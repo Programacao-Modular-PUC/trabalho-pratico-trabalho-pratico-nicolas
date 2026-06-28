@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatório de Testes JUnit — Sistema de Hospedagem</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin:0; background:#f5f6f8; color:#0f172a; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+  .top h1 { margin:0 0 4px; font-size: 26px; }
+  .top p { margin:0; color:#64748b; font-size:14px; }
+  .cards { display:grid; grid-template-columns: repeat(6, 1fr); gap:12px; margin:24px 0; }
+  .card { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px; }
+  .card-label { font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:.04em; }
+  .card-val { font-size:24px; font-weight:700; margin-top:4px; }
+  .bar { height:8px; border-radius:999px; background:#e2e8f0; overflow:hidden; margin-bottom:28px; }
+  .bar > div { height:100%; background:#16a34a; width:100.0%; }
+  .suite { background:#fff; border:1px solid #e2e8f0; border-radius:12px; margin-bottom:18px; overflow:hidden; }
+  .suite-head { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid #eef2f6; }
+  .suite-head h2 { margin:0; font-size:16px; }
+  .suite-meta { font-size:12px; color:#64748b; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:#94a3b8; padding:8px 18px; }
+  td { padding:9px 18px; border-top:1px solid #f1f5f9; vertical-align:top; }
+  tr:nth-child(even) td { background:#fbfcfd; }
+  .tname { color:#1e293b; }
+  .msg { font-size:12px; color:#dc2626; margin-top:3px; font-family:monospace; }
+  .num { text-align:right; color:#64748b; white-space:nowrap; }
+  .pill { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; white-space:nowrap; }
+  footer { text-align:center; color:#94a3b8; font-size:12px; margin-top:32px; }
+</style></head>
+<body><div class="wrap">
+  <div class="top">
+    <h1>Relatório de Testes — JUnit</h1>
+    <p>Sistema de Hospedagem · PUC Minas · gerado em 27/06/2026 20:42</p>
+  </div>
+  <div class="cards"><div class="card"><div class="card-label">Total de testes</div><div class="card-val" style="color:#0f172a">39</div></div><div class="card"><div class="card-label">Passaram</div><div class="card-val" style="color:#16a34a">39</div></div><div class="card"><div class="card-label">Falhas</div><div class="card-val" style="color:#16a34a">0</div></div><div class="card"><div class="card-label">Ignorados</div><div class="card-val" style="color:#92400e">0</div></div><div class="card"><div class="card-label">Tempo total</div><div class="card-val" style="color:#0f172a">19.70s</div></div><div class="card"><div class="card-label">Taxa de sucesso</div><div class="card-val" style="color:#16a34a">100%</div></div></div>
+  <div class="bar"><div></div></div>
+  
+    <section class="suite">
+      <header class="suite-head">
+        <h2><span style="color:#16a34a">✓</span> AluguelIntegrationTest</h2>
+        <div class="suite-meta">5 testes · 0 falhas · 17.16s</div>
+      </header>
+      <table>
+        <thead><tr><th>Status</th><th>Teste</th><th class="num">Tempo</th></tr></thead>
+        <tbody><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">semTokenRetorna401</td>
+          <td class="num">3.128s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">clienteNaoPodeCriarAluguelParaOutro</td>
+          <td class="num">0.404s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">clienteNaoPodeCriarQuarto</td>
+          <td class="num">0.225s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">fluxoCompleto</td>
+          <td class="num">0.481s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">adminListaAlugueis</td>
+          <td class="num">0.229s</td>
+        </tr></tbody>
+      </table>
+    </section>
+    <section class="suite">
+      <header class="suite-head">
+        <h2><span style="color:#16a34a">✓</span> AuthIntegrationTest</h2>
+        <div class="suite-meta">6 testes · 0 falhas · 0.38s</div>
+      </header>
+      <table>
+        <thead><tr><th>Status</th><th>Teste</th><th class="num">Tempo</th></tr></thead>
+        <tbody><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">loginUsuarioInexistente</td>
+          <td class="num">0.010s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">registroCamposInvalidos</td>
+          <td class="num">0.096s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">registroComDadosCompletos</td>
+          <td class="num">0.099s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">loginSenhaErrada</td>
+          <td class="num">0.072s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">registroUsernameRepetido</td>
+          <td class="num">0.013s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">loginValido</td>
+          <td class="num">0.065s</td>
+        </tr></tbody>
+      </table>
+    </section>
+    <section class="suite">
+      <header class="suite-head">
+        <h2><span style="color:#16a34a">✓</span> HospedagemApplicationTests</h2>
+        <div class="suite-meta">1 testes · 0 falhas · 1.35s</div>
+      </header>
+      <table>
+        <thead><tr><th>Status</th><th>Teste</th><th class="num">Tempo</th></tr></thead>
+        <tbody><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">contextLoads</td>
+          <td class="num">0.010s</td>
+        </tr></tbody>
+      </table>
+    </section>
+    <section class="suite">
+      <header class="suite-head">
+        <h2><span style="color:#16a34a">✓</span> SistemaHospedagemTest</h2>
+        <div class="suite-meta">27 testes · 0 falhas · 0.80s</div>
+      </header>
+      <table>
+        <thead><tr><th>Status</th><th>Teste</th><th class="num">Tempo</th></tr></thead>
+        <tbody><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">diarias_saidaManha_semExtra</td>
+          <td class="num">0.608s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">quartoIndisponivel_mensagemComId</td>
+          <td class="num">0.009s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">diarias_mesmoDia_ao12h</td>
+          <td class="num">0.003s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_diaria_desconto5pct</td>
+          <td class="num">0.007s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">casal_diaria_semBerco</td>
+          <td class="num">0.004s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">dataInvalida_mensagemCorreta</td>
+          <td class="num">0.003s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">casal_diaria_queen</td>
+          <td class="num">0.003s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">diarias_tresNoites_semExtra</td>
+          <td class="num">0.005s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_diaria_desconto10pct</td>
+          <td class="num">0.005s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_diaria_desconto15pct</td>
+          <td class="num">0.003s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">diarias_saidaTarde_comExtra</td>
+          <td class="num">0.006s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">disponibilidade_quartoLivre_retornaTrue</td>
+          <td class="num">0.055s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">individual_diaria_comAr</td>
+          <td class="num">0.011s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_capacidadeExcedida_viaService</td>
+          <td class="num">0.013s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">individual_limiteHospedes_armazenado</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_capacidadeExcedida_lancaExcecao</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_capacidadeMaxima_armazenada</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">casal_diaria_king</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">berco_incrementaValorEm25</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">berco_quartoIndividual_lancaRecursoNaoPermitido</td>
+          <td class="num">0.012s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">casal_diaria_comBerco</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">disponibilidade_quartoOcupado_retornaFalse</td>
+          <td class="num">0.002s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">individual_diaria_comHidro</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">individual_diaria_simples</td>
+          <td class="num">0.003s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">familia_diaria_semDesconto</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">individual_diaria_duasCamas</td>
+          <td class="num">0.000s</td>
+        </tr><tr>
+          <td><span class="pill" style="color:#16a34a;background:#dcfce7">Passou</span></td>
+          <td class="tname">berco_naoExisteEmIndividual</td>
+          <td class="num">0.004s</td>
+        </tr></tbody>
+      </table>
+    </section>
+  <footer>Relatório gerado a partir dos resultados do Maven Surefire (JUnit 5).</footer>
+</div></body></html>
