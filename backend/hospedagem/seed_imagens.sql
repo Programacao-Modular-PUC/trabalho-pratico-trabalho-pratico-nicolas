@@ -1,0 +1,25 @@
+-- ============================================================
+-- Fotos dos quartos da simulacao (quartos 1001..1015)
+-- Requer o app reiniciado com o campo 'imagens' (tabela quarto_imagens).
+-- Re-executavel.
+-- ============================================================
+USE hospedagem;
+DELETE FROM quarto_imagens WHERE quarto_id BETWEEN 1001 AND 1015;
+
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1001, 0, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000&q=80'), (1001, 1, 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=80'), (1001, 2, 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1002, 0, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=80'), (1002, 1, 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80'), (1002, 2, 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1003, 0, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1000&q=80'), (1003, 1, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1000&q=80'), (1003, 2, 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1004, 0, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000&q=80'), (1004, 1, 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=80'), (1004, 2, 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1005, 0, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=80'), (1005, 1, 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80'), (1005, 2, 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1006, 0, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1000&q=80'), (1006, 1, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1000&q=80'), (1006, 2, 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1007, 0, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000&q=80'), (1007, 1, 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=80'), (1007, 2, 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1008, 0, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=80'), (1008, 1, 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80'), (1008, 2, 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1009, 0, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1000&q=80'), (1009, 1, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1000&q=80'), (1009, 2, 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1010, 0, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000&q=80'), (1010, 1, 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=80'), (1010, 2, 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1011, 0, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=80'), (1011, 1, 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80'), (1011, 2, 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1012, 0, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1000&q=80'), (1012, 1, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1000&q=80'), (1012, 2, 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1013, 0, 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000&q=80'), (1013, 1, 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1000&q=80'), (1013, 2, 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1014, 0, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=80'), (1014, 1, 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=80'), (1014, 2, 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1000&q=80');
+INSERT INTO quarto_imagens (quarto_id, ordem, url) VALUES (1015, 0, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1000&q=80'), (1015, 1, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1000&q=80'), (1015, 2, 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1000&q=80');
+
+-- Fim.

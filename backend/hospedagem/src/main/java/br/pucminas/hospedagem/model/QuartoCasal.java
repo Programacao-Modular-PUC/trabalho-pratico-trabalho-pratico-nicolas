@@ -20,6 +20,11 @@ public class QuartoCasal extends Quarto {
     private Boolean possuiBerco = false;
 
     @Override
+    public String getTipo() {
+        return "CASAL";
+    }
+
+    @Override
     public double calcularValorDiaria() {
         double valor = getValorBase();
         switch (tipoCama.toUpperCase()) {

@@ -1,5 +1,7 @@
 package br.pucminas.hospedagem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ public class Aluguel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "residencia_id", nullable = false)
     private Residencia residencia;
@@ -38,19 +41,32 @@ public class Aluguel {
     @Column(nullable = false)
     private Double valorFinal;
 
+    // "ATIVO" ou "CANCELADO"
+    @Column(nullable = false, columnDefinition = "varchar(20) default 'ATIVO'")
+    private String status = "ATIVO";
+
     @OneToOne(mappedBy = "aluguel", cascade = CascadeType.ALL)
     private Pagamento pagamento;
 
+    // Regra: diárias iniciam às 12h.
+    // Saída após 12h → adiciona nova diária.
     /**
-     * Regra: diárias iniciam às 12h.
-     * Entrada após 12h → conta diária completa.
-     * Saída após 12h  → adiciona nova diária.
+     * Situação derivada do aluguel, calculada a partir das datas e do status:
+     * CANCELADO, RESERVADO (ainda não começou), ATIVO (em andamento) ou ENCERRADO (já terminou).
      */
+    @JsonProperty("situacao")
+    public String getSituacao() {
+        if ("CANCELADO".equals(status)) return "CANCELADO";
+        LocalDateTime agora = LocalDateTime.now();
+        if (dataEntrada != null && agora.isBefore(dataEntrada)) return "RESERVADO";
+        if (dataSaida != null && agora.isAfter(dataSaida)) return "ENCERRADO";
+        return "ATIVO";
+    }
+
     public int calcularDiarias() {
         long dias = ChronoUnit.DAYS.between(dataEntrada.toLocalDate(), dataSaida.toLocalDate());
-        if (dataEntrada.getHour() >= 12) dias++;
-        if (dataSaida.getHour() >= 12)   dias++;
-        return (int) dias;
+        if (dataSaida.getHour() >= 12) dias++;
+        return (int) Math.max(1, dias);
     }
 
     public double calcularValorFinal() {

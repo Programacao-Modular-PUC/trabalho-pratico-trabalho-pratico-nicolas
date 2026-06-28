@@ -1,6 +1,8 @@
 package br.pucminas.hospedagem.controller;
 
+import br.pucminas.hospedagem.model.Aluguel;
 import br.pucminas.hospedagem.model.Residencia;
+import br.pucminas.hospedagem.service.AluguelService;
 import br.pucminas.hospedagem.service.ResidenciaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import java.util.List;
 public class ResidenciaController {
 
     private final ResidenciaService service;
+    private final AluguelService aluguelService;
 
     @GetMapping
     public List<Residencia> listar() {
@@ -41,7 +44,7 @@ public class ResidenciaController {
     }
 
     @GetMapping("/{id}/historico")
-    public List<?> historico(@PathVariable Long id) {
-        return service.buscarPorId(id).getHistorico();
+    public List<Aluguel> historico(@PathVariable Long id) {
+        return aluguelService.listarPorResidencia(id);
     }
 }

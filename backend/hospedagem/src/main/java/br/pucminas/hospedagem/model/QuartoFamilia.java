@@ -30,6 +30,11 @@ public class QuartoFamilia extends Quarto {
     private List<String> listaCamas;
 
     @Override
+    public String getTipo() {
+        return "FAMILIA";
+    }
+
+    @Override
     public double calcularValorDiaria() {
         double valor = getValorBase() * (1 + PERCENTUAL_POR_HOSPEDE * numeroHospedes);
         valor -= valor * calcularDesconto();

@@ -2,6 +2,7 @@ package br.pucminas.hospedagem.service;
 
 import br.pucminas.hospedagem.exception.NegocioException;
 import br.pucminas.hospedagem.model.Residencia;
+import br.pucminas.hospedagem.repository.AluguelRepository;
 import br.pucminas.hospedagem.repository.ResidenciaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 public class ResidenciaService {
 
     private final ResidenciaRepository repository;
+    private final AluguelRepository aluguelRepository;
 
     public List<Residencia> listar() {
         return repository.findAll();
@@ -43,6 +45,9 @@ public class ResidenciaService {
     @Transactional
     public void deletar(Long id) {
         buscarPorId(id);
+        if (aluguelRepository.existsByResidenciaIdAndStatusNot(id, "CANCELADO")) {
+            throw new NegocioException("Não é possível excluir a residência pois há aluguéis ativos vinculados a ela.");
+        }
         repository.deleteById(id);
     }
 }

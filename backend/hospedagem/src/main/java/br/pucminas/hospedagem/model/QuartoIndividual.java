@@ -18,6 +18,11 @@ public class QuartoIndividual extends Quarto {
     private Integer limiteHospedes = 1;
 
     @Override
+    public String getTipo() {
+        return "INDIVIDUAL";
+    }
+
+    @Override
     public double calcularValorDiaria() {
         double valor = getValorBase();
         if (numeroCamas > 1) {

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.pucminas.hospedagem.HospedagemApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.349 s -- in br.pucminas.hospedagem.HospedagemApplicationTests

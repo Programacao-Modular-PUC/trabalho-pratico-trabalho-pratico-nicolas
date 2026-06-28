@@ -1,5 +1,6 @@
 package br.pucminas.hospedagem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class Residencia {
     @OneToMany(mappedBy = "residencia", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Quarto> quartos = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "residencia", cascade = CascadeType.ALL)
     private List<Aluguel> historico = new ArrayList<>();
 
