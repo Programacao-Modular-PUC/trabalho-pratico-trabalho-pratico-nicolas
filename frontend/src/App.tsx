@@ -15,27 +15,34 @@ import Historico from '@/pages/Historico'
 import Disponibilidade from '@/pages/Disponibilidade'
 import Pagamentos from '@/pages/Pagamentos'
 import CheckoutPagamento from '@/pages/CheckoutPagamento'
+import MinhaConta from '@/pages/MinhaConta'
 
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="residencias" element={<Residencias />} />
+              {/* Acessível ao cliente e ao admin */}
               <Route path="quartos" element={<Quartos />} />
               <Route path="quartos/:id" element={<QuartoDetalhe />} />
-              <Route path="clientes" element={<Clientes />} />
               <Route path="alugueis" element={<Alugueis />} />
-              <Route path="alugueis/novo" element={<AluguelNovo />} />
               <Route path="checkout/:aluguelId" element={<CheckoutPagamento />} />
-              <Route path="historico" element={<Historico />} />
-              <Route path="disponibilidade" element={<Disponibilidade />} />
-              <Route path="pagamentos" element={<Pagamentos />} />
+              <Route path="minha-conta" element={<MinhaConta />} />
+
+              {/* Apenas admin */}
+              <Route element={<ProtectedRoute adminOnly />}>
+                <Route index element={<Dashboard />} />
+                <Route path="residencias" element={<Residencias />} />
+                <Route path="clientes" element={<Clientes />} />
+                <Route path="alugueis/novo" element={<AluguelNovo />} />
+                <Route path="historico" element={<Historico />} />
+                <Route path="disponibilidade" element={<Disponibilidade />} />
+                <Route path="pagamentos" element={<Pagamentos />} />
+              </Route>
             </Route>
           </Route>
         </Routes>

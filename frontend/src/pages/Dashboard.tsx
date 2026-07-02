@@ -51,15 +51,15 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex gap-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Residências" value={String(residencias.length)} sub="cadastradas no sistema" dotColor="bg-gray-900" />
         <StatCard label="Quartos Disponíveis" value={String(disponiveis)} sub={`de ${totalQuartos} no total`} dotColor="bg-green-500" />
         <StatCard label="Aluguéis Ativos" value={String(ativos.length)} sub={saemHoje > 0 ? `${saemHoje} saem hoje` : 'em andamento'} dotColor="bg-amber-500" />
         <StatCard label="Receita Total" value={brl(receita)} sub="soma dos aluguéis" dotColor="bg-gray-900" />
       </div>
 
-      <div className="flex gap-4">
-        <Card className="flex-1">
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <Card className="flex-1 min-w-0">
           <CardHeader>
             <div>
               <p className="font-semibold text-sm text-foreground">Aluguéis Recentes</p>
@@ -67,8 +67,8 @@ export default function Dashboard() {
             </div>
           </CardHeader>
           <div className="border-t border-border" />
-          <CardContent className="p-0">
-            <table className="w-full text-sm">
+          <CardContent className="p-0 overflow-x-auto">
+            <table className="w-full text-sm min-w-[520px]">
               <thead>
                 <tr className="border-b border-border">
                   <th className="px-4 py-2 text-left text-xs font-medium text-muted-foreground">Cliente</th>
@@ -99,7 +99,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="w-64 shrink-0">
+        <Card className="w-full lg:w-64 lg:shrink-0">
           <CardHeader>
             <p className="font-semibold text-sm text-foreground">Ações Rápidas</p>
           </CardHeader>

@@ -94,7 +94,7 @@ export default function CheckoutPagamento() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* ----- Métodos ----- */}
         <div className="lg:col-span-3 space-y-4">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {metodos.map(m => (
               <button key={m.id} onClick={() => setMetodo(m.id)}
                 className={`rounded-xl border p-4 text-left transition-colors ${metodo === m.id ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/40'}`}>

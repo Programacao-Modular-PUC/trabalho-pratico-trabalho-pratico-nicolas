@@ -60,16 +60,6 @@ public class QuartoService {
         quartos.forEach(q -> q.setOcupado(ocupados.contains(q.getId())));
     }
 
-    @Transactional
-    public Quarto alterarStatus(Long id, String novoStatus) {
-        Quarto quarto = buscarPorId(id);
-        if (!"DISPONIVEL".equals(novoStatus) && !"MANUTENCAO".equals(novoStatus)) {
-            throw new NegocioException("Status inválido. Use DISPONIVEL ou MANUTENCAO.");
-        }
-        quarto.setStatus(novoStatus);
-        return repository.save(quarto);
-    }
-
     /** Monta a grade de ocupação (quarto × dia) para o período informado. */
     public List<DisponibilidadeQuarto> disponibilidade(LocalDate inicio, LocalDate fim) {
         if (fim.isBefore(inicio)) {
@@ -86,13 +76,12 @@ public class QuartoService {
             for (LocalDate dia = inicio; !dia.isAfter(fim); dia = dia.plusDays(1)) {
                 dias.add(new DiaStatus(dia, statusDoDia(q, dia, alugueis, hoje)));
             }
-            resultado.add(new DisponibilidadeQuarto(q.getId(), q.getTipo(), q.getStatus(), dias));
+            resultado.add(new DisponibilidadeQuarto(q.getId(), q.getTipo(), dias));
         }
         return resultado;
     }
 
     private String statusDoDia(Quarto quarto, LocalDate dia, List<Aluguel> alugueis, LocalDate hoje) {
-        if ("MANUTENCAO".equals(quarto.getStatus())) return "MANUTENCAO";
         for (Aluguel a : alugueis) {
             if (a.getQuarto() == null || !a.getQuarto().getId().equals(quarto.getId())) continue;
             LocalDate entrada = a.getDataEntrada().toLocalDate();

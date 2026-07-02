@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CheckCircle, Receipt } from 'lucide-react'
+import { Receipt } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -31,19 +31,10 @@ function Stat({ label, value, sub, cor }: { label: string; value: string; sub?: 
 export default function Pagamentos() {
   const [todos, setTodos] = useState<Pagamento[]>([])
   const [page, setPage] = useState(0)
-  const [loading, setLoading] = useState<number | null>(null)
-  const [erro, setErro] = useState('')
   const [recibo, setRecibo] = useState<Pagamento | null>(null)
 
   const load = () => api.pagamentos.listar(0, 1000).then(r => setTodos(r.content)).catch(() => {})
   useEffect(() => { load() }, [])
-
-  const confirmar = async (id: number) => {
-    setErro(''); setLoading(id)
-    try { await api.pagamentos.confirmar(id); await load() }
-    catch (e: unknown) { setErro(e instanceof Error ? e.message : 'Erro ao confirmar pagamento.') }
-    finally { setLoading(null) }
-  }
 
   const confirmados = useMemo(() => todos.filter(p => p.status === 'CONFIRMADO'), [todos])
   const pendentes = useMemo(() => todos.filter(p => p.status === 'PENDENTE'), [todos])
@@ -56,17 +47,15 @@ export default function Pagamentos() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Stat label="Receita Confirmada" value={brl(receita)} sub="pagamentos confirmados" cor="text-green-600" />
         <Stat label="Pagamentos Pendentes" value={String(pendentes.length)} sub={`${brl(emAberto)} em aberto`} cor="text-amber-600" />
         <Stat label="Pagamentos Confirmados" value={String(confirmados.length)} sub="quitados" />
         <Stat label="Ticket Médio" value={brl(ticket)} sub="por pagamento confirmado" />
       </div>
 
-      {erro && <p className="text-sm text-destructive">{erro}</p>}
-
-      <Card>
-        <table className="w-full text-sm">
+      <Card className="overflow-x-auto">
+        <table className="w-full text-sm min-w-[720px]">
           <thead>
             <tr className="border-b border-border bg-secondary/40">
               <th className="px-4 py-3 text-left font-medium text-muted-foreground">#</th>
@@ -94,9 +83,7 @@ export default function Pagamentos() {
                 <td className="px-4 py-3">{statusBadge(p.status)}</td>
                 <td className="px-4 py-3 text-right">
                   {p.status === 'PENDENTE' && (
-                    <Button size="sm" onClick={() => confirmar(p.id!)} disabled={loading === p.id}>
-                      <CheckCircle className="h-3.5 w-3.5" /> {loading === p.id ? 'Confirmando...' : 'Confirmar Pag.'}
-                    </Button>
+                    <span className="text-xs text-muted-foreground">Aguardando pagamento</span>
                   )}
                   {p.status === 'CONFIRMADO' && (
                     <Button size="sm" variant="outline" onClick={() => setRecibo(p)}>

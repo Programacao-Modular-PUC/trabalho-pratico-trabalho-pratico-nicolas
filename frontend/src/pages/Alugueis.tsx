@@ -44,11 +44,13 @@ export default function Alugueis() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <Button onClick={() => navigate('/alugueis/novo')}>
-          <Plus className="h-4 w-4" /> Novo Aluguel
-        </Button>
-      </div>
+      {isAdmin && (
+        <div className="flex justify-end">
+          <Button onClick={() => navigate('/alugueis/novo')}>
+            <Plus className="h-4 w-4" /> Novo Aluguel
+          </Button>
+        </div>
+      )}
 
       <Card>
         <Table>

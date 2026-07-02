@@ -27,10 +27,6 @@ public abstract class Quarto {
     @Column(nullable = false)
     private Boolean possuiHidromassagem = false;
 
-    /** Status administrativo do quarto: "DISPONIVEL" ou "MANUTENCAO". */
-    @Column(nullable = false, columnDefinition = "varchar(20) default 'DISPONIVEL'")
-    private String status = "DISPONIVEL";
-
     /** Derivado (não persistido): há aluguel ativo cobrindo o momento atual. */
     @Transient
     @JsonIgnore
@@ -60,10 +56,9 @@ public abstract class Quarto {
         return calcularValorDiaria();
     }
 
-    /** Status exibido: MANUTENCAO &gt; OCUPADO &gt; DISPONIVEL. */
+    /** Status exibido: OCUPADO se há aluguel ativo agora, senão DISPONIVEL. */
     @JsonProperty("statusAtual")
     public String getStatusAtual() {
-        if ("MANUTENCAO".equals(status)) return "MANUTENCAO";
         return ocupado ? "OCUPADO" : "DISPONIVEL";
     }
 

@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface AluguelRepository extends JpaRepository<Aluguel, Long> {
     List<Aluguel> findByResidenciaId(Long residenciaId);
-    List<Aluguel> findByClienteId(Long clienteId);
     Page<Aluguel> findByClienteId(Long clienteId, Pageable pageable);
     boolean existsByQuartoIdAndStatusNot(Long quartoId, String status);
     boolean existsByResidenciaIdAndStatusNot(Long residenciaId, String status);

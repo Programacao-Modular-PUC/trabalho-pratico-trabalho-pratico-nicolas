@@ -36,8 +36,14 @@ public class AluguelController {
     }
 
     @GetMapping("/{id}")
-    public Aluguel buscar(@PathVariable Long id) {
-        return service.buscarPorId(id);
+    public Aluguel buscar(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        Aluguel aluguel = service.buscarPorId(id);
+        if ("ROLE_CLIENTE".equals(usuario.getRole())) {
+            if (aluguel.getCliente() == null || !aluguel.getCliente().getId().equals(usuario.getClienteId())) {
+                throw new NegocioException("Você só pode acessar os seus próprios aluguéis.");
+            }
+        }
+        return aluguel;
     }
 
     @GetMapping("/residencia/{residenciaId}")

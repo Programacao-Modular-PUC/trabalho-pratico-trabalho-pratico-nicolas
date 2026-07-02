@@ -28,16 +28,24 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Login público
+                // Login e registro públicos
                 .requestMatchers("/auth/**").permitAll()
-                // Qualquer GET é acessível para usuários autenticados
-                .requestMatchers(HttpMethod.GET).authenticated()
-                // Cliente pode realizar e cancelar aluguel
+
+                // ----- Acessível a qualquer usuário autenticado (ADMIN ou CLIENTE) -----
+                // Catálogo de quartos (galeria + detalhe do cliente)
+                .requestMatchers(HttpMethod.GET, "/quartos", "/quartos/*").authenticated()
+                // Próprios dados do cliente ("Minha Conta")
+                .requestMatchers(HttpMethod.GET, "/clientes/me").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/clientes/me").authenticated()
+                // Próprios aluguéis do cliente (ownership checado no controller)
+                .requestMatchers(HttpMethod.GET, "/alugueis/cliente/**", "/alugueis/*").authenticated()
                 .requestMatchers(HttpMethod.POST, "/alugueis/**").authenticated()
                 .requestMatchers(HttpMethod.PATCH, "/alugueis/**").authenticated()
                 // Cliente paga o próprio aluguel no checkout (ownership checado no controller)
                 .requestMatchers(HttpMethod.PATCH, "/pagamentos/*/pagar").authenticated()
-                // Todo o resto exige ADMIN
+
+                // ----- Todo o resto exige ADMIN -----
+                // (listagem de clientes, pagamentos, residências, históricos administrativos, etc.)
                 .anyRequest().hasRole("ADMIN")
             )
             // Sem token / token inválido → 401 (não 403), alinhado ao tratamento do frontend

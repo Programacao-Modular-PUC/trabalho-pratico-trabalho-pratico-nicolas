@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, Navigate } from 'react-router-dom'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,7 +16,7 @@ const fmtData = (s: string) =>
 export default function AluguelNovo() {
   const navigate = useNavigate()
   const [params] = useSearchParams()
-  const { auth, isAdmin } = useAuth()
+  const { isAdmin } = useAuth()
 
   const [residencias, setResidencias] = useState<Residencia[]>([])
   const [quartos, setQuartos] = useState<Quarto[]>([])
@@ -67,24 +67,26 @@ export default function AluguelNovo() {
 
   const confirmar = async () => {
     setErro('')
-    const cli = isAdmin ? Number(clienteId) : auth?.clienteId
+    const cli = Number(clienteId)
     if (!residenciaId || !quartoId) { setErro('Selecione a residência e o quarto.'); return }
     if (!cli) { setErro('Selecione o cliente.'); return }
     if (!dataEntrada || !dataSaida) { setErro('Informe as datas de entrada e saída.'); return }
     if (new Date(dataSaida) <= new Date(dataEntrada)) { setErro('A saída deve ser posterior à entrada.'); return }
     setSalvando(true)
     try {
-      const aluguel = await api.alugueis.realizar(Number(residenciaId), Number(quartoId), cli, {
+      await api.alugueis.realizar(Number(residenciaId), Number(quartoId), cli, {
         dataEntrada: dataEntrada + ':00', dataSaida: dataSaida + ':00',
       })
-      // Cliente segue para o checkout; admin (registro presencial) volta à lista.
-      navigate(isAdmin ? '/alugueis' : `/checkout/${aluguel.id}`)
+      navigate('/alugueis')
     } catch (e: unknown) {
       setErro(e instanceof Error ? e.message : 'Erro ao realizar aluguel.')
     } finally {
       setSalvando(false)
     }
   }
+
+  // Página exclusiva do admin — o cliente aluga pela galeria de quartos.
+  if (!isAdmin) return <Navigate to="/quartos" replace />
 
   return (
     <div className="space-y-1">
@@ -133,7 +135,7 @@ export default function AluguelNovo() {
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-1">
               <Label>Data e Horário de Entrada</Label>
               <Input type="datetime-local" value={dataEntrada} onChange={e => setDataEntrada(e.target.value)} />

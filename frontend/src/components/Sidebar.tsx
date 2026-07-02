@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Home, BedDouble, Users, ClipboardList, CreditCard, History, CalendarRange, LogOut } from 'lucide-react'
+import { LayoutDashboard, Home, BedDouble, Users, ClipboardList, CreditCard, History, CalendarRange, UserRound, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -15,11 +15,12 @@ const adminLinks = [
 ]
 
 const clienteLinks = [
-  { to: '/quartos',  label: 'Quartos',  icon: BedDouble },
-  { to: '/alugueis', label: 'Aluguéis', icon: ClipboardList },
+  { to: '/quartos',     label: 'Quartos',     icon: BedDouble },
+  { to: '/alugueis',    label: 'Aluguéis',    icon: ClipboardList },
+  { to: '/minha-conta', label: 'Minha Conta', icon: UserRound },
 ]
 
-export function Sidebar() {
+export function Sidebar({ open = false, onClose }: { open?: boolean; onClose?: () => void }) {
   const { auth, logout, isAdmin } = useAuth()
   const navigate = useNavigate()
   const links = isAdmin ? adminLinks : clienteLinks
@@ -32,7 +33,12 @@ export function Sidebar() {
   const roleLabel = auth?.role === 'ROLE_ADMIN' ? 'Administrador' : 'Cliente'
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-20 flex w-[220px] flex-col border-r border-border bg-card">
+    <aside
+      className={cn(
+        'fixed inset-y-0 left-0 z-30 flex w-[220px] flex-col border-r border-border bg-card transition-transform duration-200 md:translate-x-0',
+        open ? 'translate-x-0' : '-translate-x-full',
+      )}
+    >
       <div className="px-5 py-6">
         <p className="text-base font-semibold">🏡 HospedaApp</p>
         <p className="text-xs text-muted-foreground mt-0.5">Sistema de Hospedagem</p>
@@ -46,6 +52,7 @@ export function Sidebar() {
             key={to}
             to={to}
             end={to === '/'}
+            onClick={onClose}
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',

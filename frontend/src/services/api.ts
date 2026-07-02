@@ -53,7 +53,7 @@ export interface Residencia {
   cep: string
   telefone: string
   email: string
-  quartos?: Quarto[]
+  totalQuartos?: number
 }
 
 export interface Quarto {
@@ -63,8 +63,7 @@ export interface Quarto {
   valorDiaria?: number
   possuiArCondicionado: boolean
   possuiHidromassagem: boolean
-  status?: 'DISPONIVEL' | 'MANUTENCAO'
-  statusAtual?: 'DISPONIVEL' | 'OCUPADO' | 'MANUTENCAO'
+  statusAtual?: 'DISPONIVEL' | 'OCUPADO'
   imagens?: string[]
   residenciaId?: number
   residenciaEndereco?: string
@@ -109,13 +108,12 @@ export interface Aluguel {
 
 export interface DisponibilidadeDia {
   dia: string
-  status: 'DISPONIVEL' | 'OCUPADO' | 'RESERVADO' | 'MANUTENCAO'
+  status: 'DISPONIVEL' | 'OCUPADO' | 'RESERVADO'
 }
 
 export interface DisponibilidadeQuarto {
   quartoId: number
   tipo: 'INDIVIDUAL' | 'CASAL' | 'FAMILIA'
-  status: 'DISPONIVEL' | 'MANUTENCAO'
   dias: DisponibilidadeDia[]
 }
 
@@ -150,11 +148,9 @@ export const api = {
   },
   residencias: {
     listar: () => request<Residencia[]>('/residencias'),
-    buscar: (id: number) => request<Residencia>(`/residencias/${id}`),
     criar: (data: Residencia) => request<Residencia>('/residencias', { method: 'POST', body: JSON.stringify(data) }),
     atualizar: (id: number, data: Residencia) => request<Residencia>(`/residencias/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
     deletar: (id: number) => request<void>(`/residencias/${id}`, { method: 'DELETE' }),
-    historico: (id: number) => request<Aluguel[]>(`/residencias/${id}/historico`),
   },
   quartos: {
     listar: (tipo?: string, page = 0, size = 10) => {
@@ -166,8 +162,6 @@ export const api = {
     buscar: (id: number) => request<Quarto>(`/quartos/${id}`),
     disponibilidade: (inicio: string, fim: string) =>
       request<DisponibilidadeQuarto[]>(`/quartos/disponibilidade?inicio=${inicio}&fim=${fim}`),
-    alterarStatus: (id: number, valor: 'DISPONIVEL' | 'MANUTENCAO') =>
-      request<Quarto>(`/quartos/${id}/status?valor=${valor}`, { method: 'PATCH' }),
     criarIndividual: (residenciaId: number, data: Quarto) =>
       request<Quarto>(`/quartos/individual/${residenciaId}`, { method: 'POST', body: JSON.stringify(data) }),
     criarCasal: (residenciaId: number, data: Quarto) =>
@@ -178,7 +172,8 @@ export const api = {
   },
   clientes: {
     listar: (page = 0, size = 10) => request<PageResponse<Cliente>>(`/clientes?page=${page}&size=${size}`),
-    buscar: (id: number) => request<Cliente>(`/clientes/${id}`),
+    me: () => request<Cliente>('/clientes/me'),
+    atualizarMe: (data: Cliente) => request<Cliente>('/clientes/me', { method: 'PUT', body: JSON.stringify(data) }),
     criar: (data: Cliente) => request<Cliente>('/clientes', { method: 'POST', body: JSON.stringify(data) }),
     atualizar: (id: number, data: Cliente) => request<Cliente>(`/clientes/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
     deletar: (id: number) => request<void>(`/clientes/${id}`, { method: 'DELETE' }),
@@ -197,8 +192,6 @@ export const api = {
   },
   pagamentos: {
     listar: (page = 0, size = 10) => request<PageResponse<Pagamento>>(`/pagamentos?page=${page}&size=${size}`),
-    buscar: (id: number) => request<Pagamento>(`/pagamentos/${id}`),
-    confirmar: (id: number) => request<Pagamento>(`/pagamentos/${id}/confirmar`, { method: 'PATCH' }),
     pagar: (id: number, forma: 'PIX' | 'CARTAO' | 'DINHEIRO') =>
       request<Pagamento>(`/pagamentos/${id}/pagar?forma=${forma}`, { method: 'PATCH' }),
   },

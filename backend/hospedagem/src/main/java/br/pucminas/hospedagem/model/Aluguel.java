@@ -69,10 +69,6 @@ public class Aluguel {
         return (int) Math.max(1, dias);
     }
 
-    public double calcularValorFinal() {
-        return quarto.calcularValorDiaria() * quantidadeDiarias;
-    }
-
     public String imprimirFormulario() {
         return """
                 ========== FORMULÁRIO DE ALUGUEL ==========

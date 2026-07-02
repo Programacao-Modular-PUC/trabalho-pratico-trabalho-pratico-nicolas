@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Trash2, Plus, Wrench, RotateCcw } from 'lucide-react'
+import { Trash2, Plus } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -42,7 +42,6 @@ const emptyForm = {
 const statusBadge: Record<string, { label: string; cls: string }> = {
   DISPONIVEL: { label: 'Disponível', cls: 'bg-green-100 text-green-700' },
   OCUPADO: { label: 'Ocupado', cls: 'bg-red-100 text-red-700' },
-  MANUTENCAO: { label: 'Manutenção', cls: 'bg-amber-100 text-amber-700' },
 }
 
 function QuartosAdmin() {
@@ -111,12 +110,6 @@ function QuartosAdmin() {
     finally { setDeleteId(null) }
   }
 
-  const toggleManutencao = async (q: Quarto) => {
-    const novo = q.status === 'MANUTENCAO' ? 'DISPONIVEL' : 'MANUTENCAO'
-    try { await api.quartos.alterarStatus(q.id!, novo); load(filtroTipo || undefined, page) }
-    catch (e: unknown) { alert(e instanceof Error ? e.message : 'Erro ao alterar status') }
-  }
-
   const fi = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm(p => ({ ...p, [k]: e.target.value }))
   const cb = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -129,7 +122,7 @@ function QuartosAdmin() {
   return (
     <div className="space-y-4">
       {deleteError && <p className="text-sm text-destructive">{deleteError}</p>}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Label className="whitespace-nowrap">Filtrar por tipo:</Label>
           <Select value={filtroTipo || 'TODOS'} onValueChange={onFiltroTipo}>
@@ -152,7 +145,6 @@ function QuartosAdmin() {
         {items.length === 0 && <p className="text-sm text-muted-foreground py-8">Nenhum quarto cadastrado.</p>}
         {items.map(q => {
           const badge = statusBadge[q.statusAtual ?? 'DISPONIVEL'] ?? statusBadge.DISPONIVEL
-          const emManutencao = q.status === 'MANUTENCAO'
           return (
             <Card key={q.id} className="p-4 space-y-3">
               <div className="flex items-start justify-between">
@@ -168,10 +160,7 @@ function QuartosAdmin() {
                 <div className="flex justify-between"><span className="text-muted-foreground">Hidromassagem:</span><SimNao v={q.possuiHidromassagem} /></div>
               </div>
               <div className="flex gap-2 pt-1">
-                <Button size="sm" variant="outline" className="flex-1" onClick={() => toggleManutencao(q)}>
-                  {emManutencao ? <><RotateCcw className="h-3.5 w-3.5" /> Liberar</> : <><Wrench className="h-3.5 w-3.5" /> Manutenção</>}
-                </Button>
-                <Button size="sm" className="flex-1" disabled={emManutencao}
+                <Button size="sm" className="flex-1"
                   onClick={() => navigate(`/alugueis/novo?residencia=${q.residenciaId}&quarto=${q.id}`)}>
                   Alugar
                 </Button>
@@ -192,7 +181,7 @@ function QuartosAdmin() {
             <DialogDescription>Configure o tipo e as características do quarto.</DialogDescription>
           </DialogHeader>
           {error && <p className="text-xs text-destructive">{error}</p>}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="space-y-1">
               <Label>Residência</Label>
               <Select value={form.residenciaId} onValueChange={v => setForm(p => ({ ...p, residenciaId: v }))}>

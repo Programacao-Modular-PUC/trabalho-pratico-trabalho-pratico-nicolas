@@ -24,13 +24,6 @@ public class PagamentoService {
             .orElseThrow(() -> new NegocioException("Pagamento não encontrado: " + id));
     }
 
-    @Transactional
-    public Pagamento confirmar(Long id) {
-        Pagamento pagamento = validarPagavel(id);
-        pagamento.confirmarPagamento();
-        return repository.save(pagamento);
-    }
-
     /** Pagamento realizado pelo cliente, com a forma escolhida (PIX, CARTAO, DINHEIRO). */
     @Transactional
     public Pagamento pagar(Long id, String forma) {

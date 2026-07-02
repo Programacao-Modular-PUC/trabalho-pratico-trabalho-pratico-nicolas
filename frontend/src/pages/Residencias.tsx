@@ -62,7 +62,7 @@ export default function Residencias() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Input className="max-w-xs" placeholder="Buscar residência..." value={busca} onChange={e => setBusca(e.target.value)} />
         <Button onClick={openNew}><Plus className="h-4 w-4" /> Nova Residência</Button>
       </div>
@@ -93,7 +93,7 @@ export default function Residencias() {
                 <TableCell>{r.cep}</TableCell>
                 <TableCell>{r.telefone}</TableCell>
                 <TableCell>{r.email}</TableCell>
-                <TableCell>{r.quartos?.length ?? 0}</TableCell>
+                <TableCell>{r.totalQuartos ?? 0}</TableCell>
                 <TableCell className="text-right">
                   <Button size="sm" variant="ghost" onClick={() => openEdit(r)}><Pencil className="h-4 w-4" /></Button>
                   <Button size="sm" variant="ghost" onClick={() => setDeleteId(r.id!)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
@@ -111,7 +111,7 @@ export default function Residencias() {
             <DialogDescription>Preencha os dados da residência.</DialogDescription>
           </DialogHeader>
           {error && <p className="text-xs text-destructive">{error}</p>}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="col-span-2 space-y-1">
               <Label>Endereço</Label>
               <Input value={form.endereco} onChange={field('endereco')} placeholder="Rua das Flores" />

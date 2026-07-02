@@ -1,0 +1,28 @@
+# ===== Backend (Java / Maven) =====
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.log
+
+# ===== Frontend (Node / Vite) =====
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# ===== IDEs / Editores =====
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# ===== Sistema operacional =====
+.DS_Store
+Thumbs.db
+
+# ===== Ambiente =====
+*.env
+.env.local

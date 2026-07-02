@@ -94,6 +94,36 @@ class AluguelIntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    @DisplayName("CLIENTE não pode listar todos os clientes (403)")
+    void clienteNaoListaClientes() throws Exception {
+        mockMvc.perform(get("/clientes").header("Authorization", "Bearer " + clienteToken))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @DisplayName("CLIENTE não pode listar todos os pagamentos (403)")
+    void clienteNaoListaPagamentos() throws Exception {
+        mockMvc.perform(get("/pagamentos").header("Authorization", "Bearer " + clienteToken))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @DisplayName("CLIENTE não pode listar todas as residências (403)")
+    void clienteNaoListaResidencias() throws Exception {
+        mockMvc.perform(get("/residencias").header("Authorization", "Bearer " + clienteToken))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @DisplayName("CLIENTE acessa o catálogo de quartos (200) e os próprios dados (200)")
+    void clienteAcessaCatalogoEProprioPerfil() throws Exception {
+        mockMvc.perform(get("/quartos").header("Authorization", "Bearer " + clienteToken))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/clientes/me").header("Authorization", "Bearer " + clienteToken))
+                .andExpect(status().isOk());
+    }
+
     // ----- Fluxo completo -----
 
     @Test

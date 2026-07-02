@@ -113,7 +113,7 @@ export default function Historico() {
       </Card>
 
       {/* Estatísticas */}
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Stat label="Total de Aluguéis" value={String(filtrados.length)} />
         <Stat label="Receita Total" value={brl(receita)} />
         <Stat label="Diárias Totais" value={String(diarias)} />

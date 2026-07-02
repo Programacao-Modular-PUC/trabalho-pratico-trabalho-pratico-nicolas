@@ -29,12 +29,6 @@ public class PagamentoController {
         return service.buscarPorId(id);
     }
 
-    // Admin confirma manualmente o recebimento (acompanhamento)
-    @PatchMapping("/{id}/confirmar")
-    public Pagamento confirmar(@PathVariable Long id) {
-        return service.confirmar(id);
-    }
-
     // Checkout do cliente: paga o próprio aluguel escolhendo a forma (PIX, CARTAO, DINHEIRO)
     @PatchMapping("/{id}/pagar")
     public Pagamento pagar(@PathVariable Long id, @RequestParam String forma,

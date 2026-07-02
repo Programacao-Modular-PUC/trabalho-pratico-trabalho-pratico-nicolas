@@ -21,7 +21,7 @@ export default function Login() {
     try {
       const data = await api.auth.login({ username, password })
       login({ token: data.token, username: data.username, role: data.role as 'ROLE_ADMIN' | 'ROLE_CLIENTE', clienteId: data.clienteId })
-      navigate('/', { replace: true })
+      navigate(data.role === 'ROLE_ADMIN' ? '/' : '/quartos', { replace: true })
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Usuário ou senha inválidos.')
     } finally {

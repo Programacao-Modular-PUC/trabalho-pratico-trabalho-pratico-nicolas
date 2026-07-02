@@ -100,7 +100,8 @@ export default function Cadastro() {
         endereco: form.endereco,
       })
       login({ token: data.token, username: data.username, role: data.role as 'ROLE_ADMIN' | 'ROLE_CLIENTE', clienteId: data.clienteId })
-      navigate('/', { replace: true })
+      // Registro sempre cria um CLIENTE → catálogo de quartos.
+      navigate('/quartos', { replace: true })
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erro ao criar conta.')
     } finally {

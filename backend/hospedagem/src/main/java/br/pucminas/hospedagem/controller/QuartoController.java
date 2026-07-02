@@ -44,11 +44,6 @@ public class QuartoController {
         return service.disponibilidade(inicio, fim);
     }
 
-    @PatchMapping("/{id}/status")
-    public Quarto alterarStatus(@PathVariable Long id, @RequestParam String valor) {
-        return service.alterarStatus(id, valor);
-    }
-
     @GetMapping("/{id}")
     public Quarto buscar(@PathVariable Long id) {
         return service.buscarPorId(id);

@@ -90,7 +90,7 @@ export default function Clientes() {
 
         {error && <p className="text-sm text-destructive mt-3">{error}</p>}
 
-        <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="space-y-1">
             <Label>Nome</Label>
             <Input value={form.nome} onChange={field('nome')} placeholder="João" />

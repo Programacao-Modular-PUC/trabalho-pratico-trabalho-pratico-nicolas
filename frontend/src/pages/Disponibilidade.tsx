@@ -15,7 +15,6 @@ const cor: Record<string, string> = {
   DISPONIVEL: 'bg-green-100',
   OCUPADO: 'bg-red-100',
   RESERVADO: 'bg-amber-100',
-  MANUTENCAO: 'bg-gray-200',
 }
 
 function LegendaItem({ c, label }: { c: string; label: string }) {
@@ -68,7 +67,6 @@ export default function Disponibilidade() {
         <LegendaItem c={cor.DISPONIVEL} label="Disponível" />
         <LegendaItem c={cor.OCUPADO} label="Ocupado" />
         <LegendaItem c={cor.RESERVADO} label="Reservado" />
-        <LegendaItem c={cor.MANUTENCAO} label="Manutenção" />
       </div>
 
       {/* grade */}
